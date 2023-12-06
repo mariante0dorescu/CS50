@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moogle</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="nav-flex">
+    <a href="index.html" class="logo">
+      <span class="blue">M</span>
+      <span class="red">o</span>
+      <span class="orange">o</span>
+      <span class="lightblue">g</span>
+      <span class="blue">l</span>
+      <span class="red">e</span>
+    </a>
+    <div class="links">
+      <a href="./index.html">Google Search</a>
+      <a href="./image.html">Image Search</a>
+    </div>
+  </nav>
+  <main>
+   <h2>Advanced Search</h2>
+   <hr>
+   <p>Find pages with...</p>
+  <div class="search-form">
+    <form action="https://www.google.com/search" >
+      <div class="field">
+        <label for="allwords">All these words:</label>
+        <input type="text" id="allwords" name="as_q">
+      </div>
+      <div class="field">
+        <label for="exactwords">This exact word or phrase:</label>
+        <input type="text" id="exactwords" name="as_epq">
+      </div>
+      <div class="field">
+        <label for="allwords">Any of these words</label>
+        <input type="text" id="anywords" name="as_oq">
+      </div>
+      <div class="field">
+        <label for="allwords">None of these words</label>
+        <input type="text" id="nonewords" name="as_eq">
+      </div>
+      <input type="submit" value="Advanced Search">
+    </form>
+  </div>
+  <hr>
+  </main>
+  <footer class="small centered">&copy Marian Teodorescu 2023</footer>
+</body>
+</html>
