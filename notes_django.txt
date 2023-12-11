@@ -1,0 +1,172 @@
+http - client server relation - client request from server, server responds
+MOST POPULAR STATUS CODES
+200 - OK
+301 - moved permanently
+403 - forbidden
+404 - not found
+500 - internal server error
+
+*** DJANGO
+webform already build
+to install run django-admin startproject PROJECT_NAME
+will create folder PROJECT_NAME 
+manage.py is used to execute commands - DONT TOUCh
+settings.py - configuration settings - need to be changed
+urls.py - table of contents for the applications
+
+***to run the application
+run python3 manage.py runserver
+go to the link to check if the server running
+
+
+
+****create an application
+run python3 manage.py startapp APP_NAME
+will create another folder with APP_NAME
+
+1. go into PROJECT_NAME / settings.py
+and add the name of the app into
+  INSTALLED_APPS = [
+      'APP_name',
+      ...
+  ]
+
+
+2. go into PROJECT_NAME / urls.py
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('APP_NAME/', include("APP_NAME.urls")),
+]
+
+3. go into APP_NAME and create urls.py with a single route
+
+from django.urls import path
+from . import views
+
+app_name = 'APP_NAME'
+
+urlpatterns = [
+  path("", views.index, name='index'),
+  ]
+
+
+4. go into APP_NAME / views.py and define a function
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+# Create your views here.
+- testing
+def index(request):
+  return HttpResponse('hello, world')
+
+- render
+def greet(request, name):
+  return render(request, "APP_NAME/TEMPLATE_NAME.html", {
+    #context for the template
+    "name": name.capitalize(),
+  })
+
+
+*** adding styling to the html
+inside the APP_NAME create static / APP_NAME folders / styles.css
+in the APP_NAME / templates / APP_NAME / ...html file add on the very first line
+{% load styles %}
+and on the header
+<link rel="stylesheet" href="{% static 'APP_NAME/styles.css' %}">
+
+
+
+*** html modules - template inheritance
+in APP_NAME / templates / APP_NAME / create layout.html
+inside body add
+  {% block body %}
+  {% endblock %}
+
+in the templates / APP_NAME / html....
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+  custom html
+{% endblock %}
+
+*** links between pages - DONT HARDCODE - AVOID NAMESPACE COLLISION see APP_NAME / urls.py
+based on the name set in urlpatterns from APP_NAME / urls.py
+<a href="{% url 'APP_NAME: NAME_OF_THE_page/ROUTE' %}">Add a task</a>
+example
+<a href="{% url 'tasks: add' %}">Add a task</a>
+
+*** CSRF verification
+- is turned on by default
+- add {% csrf_token %} into form 
+  <form action="{% url 'tasks:add' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="task">
+    <input type="submit" value="Submit">
+  </form>
+
+
+*** creating forms with django
+both client and server validation
+on APP_NAME / views.py add 
+from django import forms
+
+create a new class form
+class NewTaskForm(forms.Form):
+  #define fields
+  task = forms.CharField(label="New Task")
+
+when you render the request, add 
+def add(request):
+  return render(request, "tasks/add.html", {
+    "form": NewTaskForm()
+  })
+
+inside add.html plugin the form
+  <form action="{% url 'tasks:add' %}" method="post">
+  {% csrf_token %}
+  {{ form }}
+</form>
+
+
+you can add multiple fields, editing the class form
+class NewTaskForm(forms.Form):
+  #define fields
+  task = forms.CharField(label="New Task")
+  priority = forms.IntegerField(label='Priority', min_value=1, max_value=10)
+
+server side validation
+modify the add function from views.py
+
+def add(request):
+  if request.method == "POST":
+    form = NewTaskForm(request.POST) # contains all the data user submited
+
+  if form.is_valid(): 
+    task = form.cleaned_data['task']
+    tasks.append(task)
+  else: # if the form is not valid, will return the form with the already submited data back, to display info about errors
+    return render(request, 'tasks/add.html', {
+      "form": form
+    })
+
+   # if the page was called without a form submited, a new form is rendered 
+  return render(request, "tasks/add.html", {
+    "form": NewTaskForm()
+  })
+
+*** redirect
+-add
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+
+-add in the APP_NAME / views.py inside function where you want the redirect
+return HttpResponseRedirect(reverse("tasks:index"))
+
+*** session
+-instead of using local variables, store the data inside user session
+- must run python3 manage.py migrate
+-in index function
+def index(request):
+  if 'tasks' not in request.session:
+      request.session['tasks'] = []
