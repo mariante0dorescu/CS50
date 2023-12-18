@@ -208,3 +208,9 @@ urlpatterns = [
   path('products/', views.ProductList.as_view(), name='products')
 ]
 as_view() method - 
+
+SQL MIGRATIONS MODELS
+data: table of columns and rows
+SQLite - store all data in a single file (django default)
+each piece of data has a type:
+- text, numeric, integer (other type of nimeric), real (numbers), blob (binary data: files)
