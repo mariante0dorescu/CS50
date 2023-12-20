@@ -1,0 +1,11 @@
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Flight, Airport
+
+# Create your views here.
+
+
+def index(request):
+  return render(request, 'flights/index.html', {
+    "flights": Flight.objects.all()
+  })
