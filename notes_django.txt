@@ -213,4 +213,113 @@ SQL MIGRATIONS MODELS
 data: table of columns and rows
 SQLite - store all data in a single file (django default)
 each piece of data has a type:
-- text, numeric, integer (other type of nimeric), real (numbers), blob (binary data: files)
+  - text (strings)
+  - numeric (other type of numeric type of data)
+  - integer (numbers +-)
+  - real (numbers with decimal)
+  - blob (binary data: files)
+
+MySQL data types:
+- CHAR (size) - max number of characters
+- VARCHAR (size) - variable lenght - min max number of characters
+- INT - different bytes amount for storing numbers
+- BigINT
+- FLOAT
+- DOUBLE - more recise than FLOAT
+
+.mode columns
+.headers yes
+
+*create a table example
+- create name of the table and the name of columns
+- each of the columns has a type with additional constraints
+CREATE TABLE flights ( 
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  origin TEXT NOT NULL,
+  destination TEXT NOT NULL,
+  duration INTEGER NOT NULL
+)
+ * insert data in columns
+ INSERT INTO flights (origin, destination, duration) VALUES("aaa", "aaaa", 450)
+
+
+* sql queries - get data from table
+
+AVG
+COUNT
+MAX
+MIN
+SUM
+* - all
+% - zero or more characters
+
+LIMIT BY - limit the number of queries result
+ORDER BY - how the results are returned, order by destination, duration
+GROUP BY - group by a criteria, GROUP BY origin
+HAVING
+
+SELECT * FROM flights;
+SELECT origin, destination FROM flights;
+SELECT * FROM flights WHERE id = 3;
+SELECT * FROM flights WHERE origin = "New York";
+SELECT * FROM flights WHERE duration > 500;
+SELECT * FROM flights WHERE duration > 500 AND destination = "Paris";
+SELECT * FROM flights WHERE duration > 500 OR destination = "Paris";
+SELECT * FROM flights WHERE origin IN ("New York", "Lima");
+SELECT * FROM flights WHERE origin LIKE "%a%"; 
+
+
+* update data
+UPDATE flights
+  SET duration = 430
+  WHERE origin = "New York"
+  AND destination = "London";
+
+* delete data
+DELETE FROM FLIGHTS WHERE destination = "Tokio";
+
+
+JOINING TABLES - JOIN takes multiple tables and joins them together
+relate different tables by FOREIGN KEYS
+Many To Many relationship / mapping
+
+SELECT first, origin, destination FROM flights JOIN passangers ON passangers.flight_id = flight_id;
+
+JOIN / INNER JOIN - default
+LEFT OUTER JOIN - if something doesnt match
+RIGHT OUTER JOIN - 
+FULL OUTER JOIN -
+
+CREATE INDEX
+CREATE INDEX name_index ON passengers (last) - search more efficiently on last name from that table
+
+SQL INJECTION ATTACK
+- escape characters
+
+DJANGO MODELS
+Creating models: represents data to be stored in db
+create a class for each table to be stored
+
+class Flight(models.Model):
+  origin = models.CharField(max_lenght=64)
+  destination = models.CharField(max_lenght=64)
+  duration = models.IntegerField()
+
+  # this will return a string representation of the entry
+  def __str__(self):
+  return f"{self_id}: {self.origin} to {self.destination}"
+
+MIGRATIONS - tell django that are some changes and apply them to DB
+from django.urls import path, include - create a file with instructions for creating tables in db
+
+from django.urls import path, include - apply the migrations / create the table(s)
+
+USING SHELL 
+python3 manage.py shell 
+
+> from APP_NAME.models import CLASS_NAME
+> f = Flight(origin="New York", destination="London", duration=415)
+> f.save()
+- will insert data in db
+
+to make a querie: Flight.objects.all()
