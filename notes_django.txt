@@ -363,9 +363,12 @@ DJANGO ADMIN
 create a superuser usign manage.py createsuperuser
   ADD THE MODELS INTO APP_NAME / admin.py
 
-  from .models import CLASS_NAME
+  from .models import MODELS_CLASS_NAME
 
-  admin.site.register(CLASS_NAME)
+  admin.site.register(MODELS_CLASS_NAME)
+
+MANIPULATE DB via app
+!!!! ALWAYS VIA POST METHOD
 
 
 

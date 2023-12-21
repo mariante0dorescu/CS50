@@ -2,7 +2,7 @@
 
 {% block body %}
     {% for flight in flights %}
-        <p>Flight {{ flight }} - Duration: {{ flight.duration }} minutes</p>
+        <p><a href="{% url 'flights:flight' flight.id %}">{{ flight }}</a> - Duration: {{ flight.duration }} minutes</p>
     {% empty %}
         <p>No matching airports for this flight</p>
     {% endfor %}
