@@ -16,19 +16,19 @@
     {% endfor %}
   </ul>
   
+  {% if non_passengers %}
   <h2>Add passenger</h2>
-  <form action="{% url 'flights:book'  %}" method="POST">
+
+  <form action="{% url 'flights:book' flight.id %}" method="POST">
     {% csrf_token %}
     <select name="passenger">
       {% for non_passenger in non_passengers %}
         <option value="{{ non_passenger.id }}">{{non_passenger}}</option>
-      {% empty %}
-        <option></option>
       {% endfor %}
     </select>
     <input type="submit" value="Add">
   </form>
-  
+  {% endif %}
   
   <a href="{% url 'flights:index' %}">Go back</a>
 

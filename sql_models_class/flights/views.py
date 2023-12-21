@@ -29,7 +29,7 @@ def book(request, flight_id):
     passenger.flights.add(flight) # add a new row in table
 
     #redirect
-    return HttpResponseRedirect(reverse("flight", args=(flight.id)))
-  
-  return HttpResponse("added")
+    return HttpResponseRedirect(reverse("flights:flight", args=(flight.id,)))
+    
+
 

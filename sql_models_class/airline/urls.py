@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import redirect_to_flights
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('flights.urls')),
+    path('', redirect_to_flights),
+    path('flights/', include('flights.urls')), 
+    path('users/', include('users.urls')), 
+
 ]
