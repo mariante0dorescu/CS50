@@ -199,7 +199,7 @@ urlpatterns = [
 from django.views.generic.list import ListView
 from .models import Product
 
-class ProductList(listView):
+class ProductList(ListView):
   model = Product
 
 *app/urls.py
@@ -208,6 +208,16 @@ urlpatterns = [
   path('products/', views.ProductList.as_view(), name='products')
 ]
 as_view() method - 
+
+
+#restrict user to acceas any page if not logged in
+from django.contrib.auth.mixins import LoginRequiredMixin 
+add in LoginRequiredMixin in class parameters:
+class TaskList(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = "tasks"
+    template_name = 'base/tasks.html'
+
 
 SQL MIGRATIONS MODELS
 data: table of columns and rows
@@ -372,6 +382,9 @@ MANIPULATE DB via app
 
 CONFIGURE ADMIN PAGES
 - create classes with options, see documentation
+
+from .models import TASK_NAME or *
+
 class FlightAdmin(admin.ModelAdmin):
     list_display = ("id", "origin", "destination", "duration")
 
@@ -387,6 +400,14 @@ create app users
 in PROJECT_NAME / settings add APP_NAME
 in PROJECT_NAME / urls add path('users/', include('users.urls')), 
 
+check is the user is logged in
+ {% if request.user.is_authenticated %}
+    <a href="">Logout</a>
+    {% else %}
+    <a href="">Login</a>
+    <a href="">Register</a>
+    {% endif %}
+
 create users / urls.py
 - with 3 routes
 from django.urls import path
@@ -401,6 +422,7 @@ urlpatterns = [
 ]
 
 in users / views add 
+
 from django.contrib.auth import authenticate, login, logout
 and create the 3 functions:
 def index(request):
