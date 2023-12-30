@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'auctions',
+    'auctions.apps.AuctionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +128,5 @@ MEDIA_URL = 'auctions/uploads/'
 # Path where media is stored'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'auctions/uploads')
 
+# Use BigAutoField for auto-created primary keys
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
