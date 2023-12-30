@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>{{listing.title}}</h2>
+    <p>{{listing.text}}</p>
+
+    {% if listing.image %}
+    <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+    {% else %}
+    <img src="{% static 'auctions/default.jpg' %}" alt="No image">
+    {% endif %}
+
+    <p>{{listing.price}}</p>
+    <p>{{listing.category}}</p>
+{% endblock %}

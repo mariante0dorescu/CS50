@@ -51,9 +51,13 @@ class Listing(models.Model):
             return self.start + timezone.timedelta(hours=12)
 
     def save(self,*args, **kwargs):
-        self.end = self.calculate_end
-        self.active = self.end > timezone.now()
+        if self.active:
+            self.end = self.calculate_end
+            self.active = self.end > timezone.now()
         super().save(*args, **kwargs)
+
+    def image_url(self):
+        return self.image.url if self.image else None
 
     def __str__(self):
         return self.title
