@@ -19,7 +19,6 @@ class Category(models.Model):
 class User(AbstractUser):
     pass
 
-
 class Listing(models.Model):
 
     DURATION = (
@@ -32,7 +31,8 @@ class Listing(models.Model):
     title = models.CharField(max_length=65, null=False, blank=True)
     text = models.TextField(null=True)
     image = models.FileField(upload_to=image_path, blank=True, null=False)
-    price = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(limit_value=0.01)], default=0.0)
+    starting_bid = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(limit_value=0.01)], default=0.0)
+    current_bid = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     start = models.DateTimeField(default=timezone.now)
     end = models.DateTimeField(null=True, blank=True)
     duration = models.PositiveIntegerField(default=1, choices=DURATION)
@@ -55,18 +55,22 @@ class Listing(models.Model):
         self.active = self.end > timezone.now()
         super().save(*args, **kwargs)
 
+    def image_url(self):
+        return self.image.url if self.image else None
+
     def __str__(self):
         return self.title
     
     class Meta:
         ordering = ['start']
 
-
-
-
 class Bid(models.Model):
-    pass
-
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids', null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bids', null=True, blank=True)
+    bid = models.DecimalField(max_digits=5, decimal_places=2,null=True, blank=True)
 
 class Comment(models.Model):
+    pass
+
+class Watchlist(models.Model):
     pass
