@@ -68,6 +68,10 @@ class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bids', null=True, blank=True)
     bid = models.DecimalField(max_digits=5, decimal_places=2,null=True, blank=True)
+    
+    def __str__(self):
+        return self.bid
+
 
 class Comment(models.Model):
     pass
