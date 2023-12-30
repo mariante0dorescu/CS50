@@ -9,6 +9,13 @@ def image_path(instance, filename):
     user_id = instance.user.id
     return f'{user_id}/{filename}'
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
 class User(AbstractUser):
     pass
 
@@ -29,6 +36,7 @@ class Listing(models.Model):
     start = models.DateTimeField(default=timezone.now)
     end = models.DateTimeField(null=True, blank=True)
     duration = models.PositiveIntegerField(default=1, choices=DURATION)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     active = models.BooleanField(default=False)
 
     @property
@@ -52,6 +60,9 @@ class Listing(models.Model):
     
     class Meta:
         ordering = ['start']
+
+
+
 
 class Bid(models.Model):
     pass
