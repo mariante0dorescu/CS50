@@ -35,7 +35,6 @@ class Listing(models.Model):
     text = models.TextField(null=True)
     image = models.FileField(upload_to=image_path, blank=True, null=False)
     starting_bid = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(limit_value=0.01)], default=0.0)
-    current_bid = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     start = models.DateTimeField(default=timezone.now)
     end = models.DateTimeField(null=True, blank=True)
     duration = models.PositiveIntegerField(default=1, choices=DURATION)
@@ -52,6 +51,11 @@ class Listing(models.Model):
             return self.start + timezone.timedelta(hours=12)
         else:
             return self.start + timezone.timedelta(hours=12)
+
+    @property
+    def current_bid(self):
+        latest_bid = self.bids.order_by('-bid').first()
+        return latest_bid.bid if latest_bid else None
 
     def save(self,*args, **kwargs):
         self.end = self.calculate_end
@@ -73,7 +77,7 @@ class Bid(models.Model):
     bid = models.DecimalField(max_digits=5, decimal_places=2,null=True, blank=True)
     
     def __str__(self):
-        return self.bid
+        return str(self.bid)
 
 
 class Comment(models.Model):
