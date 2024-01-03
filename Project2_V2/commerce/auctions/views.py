@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 
@@ -75,11 +76,37 @@ def listing(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
     last_bid = Bid.objects.filter(listing=listing).last()
     comments = Comment.objects.filter(listing=listing)
+    watching = Watching.objects.filter(user=request.user.id, listing=listing.id).exists()  
 
     context = { 
         "listing" : listing,
         'bid': last_bid,
         "comments":comments,
-        "owner": checkOwner(request,listing)}
+        "owner": checkOwner(request,listing),
+        "watching": watching,
+        }
 
     return render(request, "auctions/listing.html", context)
+
+
+@login_required(login_url='/login/')
+def watch(request, pk):
+    item = get_object_or_404(Listing, pk=pk)
+    item_exists = Watching.objects.filter(user=request.user.id, listing=item.id).exists()
+
+    if item_exists:
+        return HttpResponse('Item is already on your watch.')
+    else:
+        user_list, created = Watching.objects.get_or_create(user=request.user)
+        user_list.listing.add(item)
+        return HttpResponseRedirect(reverse('listing', args=[pk]))
+
+@login_required(login_url='/login/')
+def unwatch(request, pk):
+    item = get_object_or_404(Listing, pk=pk)    
+    user_list = Watching.objects.get(user=request.user)
+    try:
+        user_list.listing.remove(item)
+        return HttpResponseRedirect(reverse('listing', args=[pk]))
+    except Watching.DoesNotExist:
+        return HttpResponse('Item is not on your watch.')

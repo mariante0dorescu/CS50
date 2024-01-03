@@ -54,4 +54,7 @@ class Comment(models.Model):
 
 class Watching(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=False, blank=True, related_name="user_watching")
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,null=True, blank=True, related_name="watching_listing")
+    listing = models.ManyToManyField(Listing)
+
+    def __str__(self):
+        return str(self.user)

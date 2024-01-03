@@ -9,12 +9,11 @@ class BidsAdmin(admin.ModelAdmin):
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ['user', 'listing', 'comment']
 
-class WatchingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'listing']
+
 
 admin.site.register(User)
 admin.site.register(Category)
 admin.site.register(Listing)
-admin.site.register(Watching, WatchingAdmin)
+admin.site.register(Watching)
 admin.site.register(Comment, CommentsAdmin)
 admin.site.register(Bid, BidsAdmin)
