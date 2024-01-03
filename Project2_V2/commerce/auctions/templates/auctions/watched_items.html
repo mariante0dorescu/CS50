@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block body %}
-
-<h2>Active Listings</h2>
+<h2>Watched listings</h2>
 
     {% for listing in listings %}
     <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
@@ -18,12 +17,10 @@
     <p>{{listing.category}}</p>
     <p>{{listing.description}}</p>
     <p>{{listing.listing_bid.last.bid}}</p>
+     <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
 
     {% empty %}
         <p>No active listings.</p>
     {% endfor %}
 
 {% endblock %}
-
-
-

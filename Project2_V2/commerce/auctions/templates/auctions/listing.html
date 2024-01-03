@@ -3,13 +3,14 @@
 
 {% block body %}
     <h3>{{listing.title}}</h3>
-
-    {% if watching %}
-        <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
-    {% else %}
-    <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
+    <a href="{% url 'watching' %}">My watched items</a>
+    {% if not owner %}
+        {% if watching %}
+            <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
+        {% else %}
+        <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
+        {% endif %}
     {% endif %}
-
     {% if listing.image %}
     <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
     {% else %}

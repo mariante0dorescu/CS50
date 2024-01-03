@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -88,6 +88,14 @@ def listing(request, pk):
 
     return render(request, "auctions/listing.html", context)
 
+@login_required(login_url='/login/')
+def watching_list(request):
+    items = Watching.objects.all().filter(user=request.user).values_list('listing', flat=True)
+    listings = Listing.objects.filter(pk__in=items)
+
+    return render(request, "auctions/watched_items.html", {
+        "listings" : listings,
+    })
 
 @login_required(login_url='/login/')
 def watch(request, pk):
@@ -107,6 +115,11 @@ def unwatch(request, pk):
     user_list = Watching.objects.get(user=request.user)
     try:
         user_list.listing.remove(item)
-        return HttpResponseRedirect(reverse('listing', args=[pk]))
+        previous_page = request.META.get('HTTP_REFERER')
+        if previous_page:
+            return redirect(previous_page)
+        else:
+            return HttpResponseRedirect(reverse('listing', args=[pk]))
+
     except Watching.DoesNotExist:
         return HttpResponse('Item is not on your watch.')
