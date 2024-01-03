@@ -6,5 +6,5 @@ register = template.Library()
 @register.inclusion_tag("auctions/category_list.html")
 
 def show_categories(categories):
-    #categories = Category.objects.all()
+    categories = Category.objects.all()
     return {"categories": categories}
