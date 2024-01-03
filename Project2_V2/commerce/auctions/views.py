@@ -14,9 +14,10 @@ def checkOwner(req, lis):
 
 def index(request):
     listings = Listing.objects.all().filter(active=True)
-
+    categories = Category.objects.all()
     return render(request, "auctions/index.html", {
         "listings" : listings,
+        'categories': categories
     })
 
 def categories(request):
@@ -24,6 +25,7 @@ def categories(request):
     
     return render(request, "auctions/category_list.html", {
         "categories" : categories,
+        
     })
 
 
@@ -31,9 +33,10 @@ def categories(request):
 def category(request, str):
     category = get_object_or_404(Category, name=str)
     listings = Listing.objects.all().filter(category=category)
-
+    categories = Category.objects.all()
     return render(request, "auctions/index.html", {
         "listings" : listings,
+        'categories': categories
     })
 
 def login_view(request):

@@ -1,6 +1,8 @@
+{% block body %}
 <h2>Categories</h2>
 <ul>
     {% for category in categories %}
         <li><a href="{% url 'category' category.name %}">{{category.name}}</a></li>
     {% endfor %}
 </ul>
+{% endblock %}
