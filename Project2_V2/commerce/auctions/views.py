@@ -19,6 +19,22 @@ def index(request):
         "listings" : listings,
     })
 
+def categories(request):
+    categories = Category.objects.all()
+    
+    return render(request, "auctions/category_list.html", {
+        "categories" : categories,
+    })
+
+
+
+def category(request, str):
+    category = get_object_or_404(Category, name=str)
+    listings = Listing.objects.all().filter(category=category)
+
+    return render(request, "auctions/index.html", {
+        "listings" : listings,
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -117,6 +133,7 @@ def unwatch(request, pk):
         user_list.listing.remove(item)
         previous_page = request.META.get('HTTP_REFERER')
         if previous_page:
+            print(previous_page)
             return redirect(previous_page)
         else:
             return HttpResponseRedirect(reverse('listing', args=[pk]))

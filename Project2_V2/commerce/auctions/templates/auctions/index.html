@@ -3,6 +3,7 @@
 
 {% block body %}
 
+
 <h2>Active Listings</h2>
 
     {% for listing in listings %}
@@ -15,7 +16,8 @@
         {% endif %}
 
 
-    <p>{{listing.category}}</p>
+    <!-- <p>{{listing.category}}</p> -->
+    <a href="{% url 'category' listing.category%}">{{listing.category}}</a>
     <p>{{listing.description}}</p>
     <p>{{listing.listing_bid.last.bid}}</p>
 

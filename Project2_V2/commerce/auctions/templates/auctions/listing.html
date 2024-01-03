@@ -32,7 +32,7 @@
     {% elif not owner %}
     <form action="" method="post">
         {% csrf_token %}
-        <input type="number" name="bid_amount" id="bid_amount" {% if not bid.bid %} min="{{listing.starting}}" placeholder="{{listing.starting}} {% else %} min="{{bid.bid}}" placeholder="{{bid.bid}} {% endif %}">
+        <input type="number" name="bid_amount" id="bid_amount" {% if not bid.bid %} min="{{listing.starting}}"  placeholder="{{listing.starting}} {% else %} min="{{bid.bid}}" placeholder="{{bid.bid}} {% endif %}">
         <input type="submit" value="Bid">
     </form>
     {%else%}
@@ -46,4 +46,10 @@
     {%empty%}
     <p>No bids yet.</p>
     {% endfor %}
+    <h4>Add a comment</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="textarea">
+        <input type="submit" value="Comment">
+    </form>
 {% endblock %}

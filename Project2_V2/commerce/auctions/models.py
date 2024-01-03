@@ -26,7 +26,7 @@ class Listing(models.Model):
     description = models.CharField(max_length=200)
     image = models.FileField(upload_to=image_path, blank=True, null=False)
     starting = models.DecimalField(max_digits=3, decimal_places=2,validators=[MinValueValidator(limit_value=1)], default=1)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False, blank=True, related_name='category')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='category')
     active = models.BooleanField(default=True)
 
     def image_url(self):
