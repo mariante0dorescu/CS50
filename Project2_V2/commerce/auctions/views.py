@@ -19,6 +19,7 @@ def index(request):
         "listings" : listings,
     })
 
+
 def categories(request):
     categories = Category.objects.all()
     
@@ -35,6 +36,7 @@ def category(request, str):
     return render(request, "auctions/index.html", {
         "listings" : listings,
     })
+
 
 def login_view(request):
     if request.method == "POST":
