@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'auctions.apps.AuctionsConfig',
+    'auctions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 ROOT_URLCONF = 'commerce.urls'
 
@@ -123,10 +122,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Base url to serve media files
-MEDIA_URL = 'auctions/uploads/'
+MEDIA_URL = '/uploads/'
 
 # Path where media is stored'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'auctions/uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # Use BigAutoField for auto-created primary keys
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

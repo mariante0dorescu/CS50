@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% load show_categories %}
+
+{% block body %}
+{% show_categories categories %}
+
+
+<h2>Active Listings</h2>
+
+    {% for listing in listings %}
+    <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
+    
+        {% if listing.image %}
+            <img src="{{listing.image_url}}" alt="{{ listing.title}}">
+        {% else %}
+            <img src="{{ MEDIA_URL }}uploads/default.jpg" alt="No image">
+        {% endif %}
+
+
+    <!-- <p>{{listing.category}}</p> -->
+    <a href="{% url 'category' listing.category%}">{{listing.category}}</a>
+    <p>{{listing.description}}</p>
+    <p>{{listing.listing_bid.last.bid}}</p>
+
+    {% empty %}
+        <p>No active listings.</p>
+    {% endfor %}
+
+{% endblock %}
+
+
+

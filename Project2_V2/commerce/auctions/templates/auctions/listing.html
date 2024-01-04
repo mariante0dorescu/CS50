@@ -1,0 +1,56 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    <h3>{{listing.title}}</h3>
+    <a href="{% url 'watching' %}">My watched items</a>
+    {% if not owner %}
+        {% if watching %}
+            <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
+        {% else %}
+        <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
+        {% endif %}
+    {% endif %}
+    {% if listing.image %}
+    <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+    {% else %}
+        <img src="/uploads/default.jpg" alt="No image">
+    {% endif %}
+
+    {% if bid and not owner %}
+        <h4>Latest bid</h4>
+        <p>{{bid.user}} ${{bid}}</p>
+    {% endif %}
+    
+    
+    {% if owner and bid %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Highest bid: ${{bid}}</p>
+        <input type="submit" value="Close auction">
+    </form>
+    {% elif not owner %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="number" name="bid_amount" id="bid_amount" {% if not bid.bid %} min="{{listing.starting}}"  placeholder="{{listing.starting}} {% else %} min="{{bid.bid}}" placeholder="{{bid.bid}} {% endif %}">
+        <input type="submit" value="Bid">
+    </form>
+    {%else%}
+        <p>No bids yet.</p>
+    {% endif %}
+   
+    <h4>Comments</h4>
+    {% for comment in comments %}
+    <p><b>{{comment.user}}</b></p>
+    <p>{{comment.comment}}</p>
+    {%empty%}
+    <p>No bids yet.</p>
+    {% endfor %}
+    <h4>Add a comment</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="textarea">
+        <input type="submit" value="Comment">
+    </form>
+{% endblock %}
