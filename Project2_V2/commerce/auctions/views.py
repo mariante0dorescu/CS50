@@ -126,7 +126,16 @@ def listing(request, pk):
             return HttpResponse(request.POST['close'])
 
         elif "comment" in request.POST:
-            return HttpResponse(request.POST['comment'])       
+            new_comment = request.POST['comment']
+            if new_comment.strip():
+                new_comment = Comment(user=request.user, listing=listing, comment=new_comment)
+                new_comment.save()
+                return HttpResponseRedirect(reverse('listing', args=[pk]))
+            else:
+                comment_error = "Please enter a comment"
+                context["comment_error"] = comment_error
+                return render(request, "auctions/listing.html", context)
+
 
     return render(request, "auctions/listing.html", context)
 
