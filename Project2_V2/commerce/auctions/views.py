@@ -91,6 +91,7 @@ def register(request):
 
 
 def listing(request, pk):
+
     listing = get_object_or_404(Listing, pk=pk)
     last_bid = Bid.objects.filter(listing=listing).last()
     comments = Comment.objects.filter(listing=listing)
@@ -103,6 +104,29 @@ def listing(request, pk):
         "owner": checkOwner(request,listing),
         "watching": watching,
         }
+
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
+
+        elif "bid_amount" in request.POST:
+            form_bid = float(request.POST['bid_amount'])
+
+            if form_bid > last_bid.bid:
+                new_bid = Bid(user=request.user, listing=listing, bid=form_bid)
+                new_bid.save()
+                return HttpResponseRedirect(reverse('listing', args=[pk]))
+            else:
+                bid_error = "Bid must be greater than last bid"
+                context["bid_error"] = bid_error
+                context["bid"] = form_bid
+                return render(request, "auctions/listing.html", context)
+
+        elif "close" in request.POST:
+            return HttpResponse(request.POST['close'])
+
+        elif "comment" in request.POST:
+            return HttpResponse(request.POST['comment'])       
 
     return render(request, "auctions/listing.html", context)
 
