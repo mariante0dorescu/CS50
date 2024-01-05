@@ -14,6 +14,7 @@
             {% if user.is_authenticated %}
                 Signed in as <strong>{{ user.username }}</strong>.
                 <a href="{% url 'watching' %}">My watched items</a>
+                <a href="{% url 'create' %}">New listing</a>
             {% else %}
                 Not signed in.
             {% endif %}

@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if message %}
+        <p>Nine</p>
+    {% endif %}
+    <label for="title">Title:</label><br>
+        <input type="text" name="title" id="title" required><br>
+    <label for="description">Description:</label><br>
+        <input type="text" name="description" id="description" required><br>
+    <label for="image">Upload a image:</label><br>
+        <input type="file" name="image" id="image"><br>
+    <label for="starting">Starting price:</label><br>
+        <input type="number" name="starting" id="starting" min="1" required><br>
+    <label for="category">Select a category</label><br>
+        <select name="category" id="category">
+        {% for category in categories %}
+            <option value="{{category}}">{{category|capfirst}}</option>
+        {% endfor %}
+        </select><br><br>
+    <input type="submit" value="Create Listing">
+</form>
+{% endblock %}

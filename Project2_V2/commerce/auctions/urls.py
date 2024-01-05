@@ -14,4 +14,5 @@ urlpatterns = [
     path("listing/<int:pk>", views.listing, name='listing'),
     path("listing/<int:pk>/watch", views.watch, name='watch'),
     path("listing/<int:pk>/unwatch", views.unwatch, name='unwatch'),
+    path("create/", views.create, name="create")
 ]

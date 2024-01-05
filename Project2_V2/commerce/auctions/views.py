@@ -195,3 +195,23 @@ def categories_all(request):
     return render(request, 'auctions/all_categories.html', {
         'categories_listings': categories_listings
     })
+
+def create(request):
+
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        title = request.POST['title'].strip()
+        description = request.POST['description'].strip()
+        image = request.FILES.get('image')
+        starting = int(request.POST['starting'])
+        category = Category.objects.get(name=request.POST['category'])
+        print(starting)
+
+        new_listing = Listing(user=user, title=title, description=description, image=image, starting=starting, category=category)
+        new_listing.save()
+        return HttpResponseRedirect(reverse('index'))
+
+    context ={
+      "categories": Category.objects.all()
+    } 
+    return render(request, 'auctions/create.html', context)
