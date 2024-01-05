@@ -180,3 +180,15 @@ def unwatch(request, pk):
 
     except Watching.DoesNotExist:
         return HttpResponse('Item is not on your watch.')
+
+def categories_all(request):
+    categories = Category.objects.all()
+    categories_listings = {}
+    for category in categories:
+        listings = Listing.objects.filter(category=category)
+        categories_listings[category] = listings
+
+    
+    return render(request, 'auctions/all_categories.html', {
+        'categories_listings': categories_listings
+    })
