@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+{% for category, listings in categories_listings.items %}
+    <h2>{{ category.name }}</h2>
+    <hr>
+    {% for listing in listings %}
+    <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
+<!--     
+        {% if listing.image %}
+            <img src="{{listing.image_url}}" alt="{{ listing.title}}">
+        {% else %}
+            <img src="../../uploads/default.jpg" alt="No image">
+        {% endif %} -->
+
+    <p>{{listing.description}}</p>
+    <hr>
+    {% empty %}
+        <p>No active listings.</p>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
