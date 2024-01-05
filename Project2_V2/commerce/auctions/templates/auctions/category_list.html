@@ -1,8 +1,10 @@
 {% block body %}
 <h2>Categories</h2>
-<ul>
+<ul class="nav">
     {% for category in categories %}
-        <li><a href="{% url 'category' category.name %}">{{category.name}}</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'category' category.name %}">{{category.name}}</a>
+        </li>
     {% endfor %}
 </ul>
 {% endblock %}

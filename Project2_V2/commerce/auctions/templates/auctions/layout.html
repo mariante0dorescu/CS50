@@ -1,4 +1,5 @@
 {% load static %}
+{% load show_categories %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +34,8 @@
                 </li>
             {% endif %}
         </ul>
+        <hr>
+        {% show_categories categories %}
         <hr>
         {% block body %}
         {% endblock %}
