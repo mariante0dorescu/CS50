@@ -8,15 +8,7 @@
 
     {% for listing in listings %}
     <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
-    
-        {% if listing.image %}
-            <img src="{{listing.image_url}}" alt="{{ listing.title}}">
-        {% else %}
-            <img src="{{ MEDIA_URL }}uploads/default.jpg" alt="No image">
-        {% endif %}
-
-
-    <!-- <p>{{listing.category}}</p> -->
+    <img src="{{listing.image_url}}" alt="{{ listing.title}}">
     <a href="{% url 'category' listing.category%}">{{listing.category}}</a>
     <p>{{listing.description}}</p>
     <p>{{listing.listing_bid.last.bid}}</p>

@@ -4,13 +4,7 @@
 
 {% block body %}
     <h3>{{listing.title}}</h3>
-
-    <!-- check for a image -->
-    {% if listing.image %}
     <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
-    {% else %}
-        <img src="/uploads/default.jpg" alt="No image">
-    {% endif %}
 
     <!-- check if listing is active -->
     {% if listing.active %}

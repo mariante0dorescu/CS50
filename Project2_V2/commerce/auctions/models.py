@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
+import os
 from django.core.validators import MinValueValidator
 
 #returns an image path based on user id
@@ -31,7 +33,7 @@ class Listing(models.Model):
     winner = models.OneToOneField(User, on_delete=models.PROTECT, null=True, blank=True, related_name="winner")
 
     def image_url(self):
-        return self.image.url if self.image else None
+        return self.image.url if self.image else os.path.join(settings.MEDIA_URL, 'default.jpg')
 
     def save(self,*args, **kwargs):
         if self.winner:

@@ -9,13 +9,7 @@
     <hr>
     {% for listing in listings %}
     <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
-<!--     
-        {% if listing.image %}
-            <img src="{{listing.image_url}}" alt="{{ listing.title}}">
-        {% else %}
-            <img src="../../uploads/default.jpg" alt="No image">
-        {% endif %} -->
-
+    <img src="{{listing.image_url}}" alt="{{ listing.title}}">
     <p>{{listing.description}}</p>
     <hr>
     {% empty %}

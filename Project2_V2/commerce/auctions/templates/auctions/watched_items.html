@@ -18,12 +18,7 @@
         {% endif %}
     {% endif %}
 
-        {% if listing.image %}
-            <img src="{{listing.image_url}}" alt="{{ listing.title}}">
-        {% else %}
-            <img src="{{ MEDIA_URL }}uploads/default.jpg" alt="No image">
-        {% endif %}
-
+    <img src="{{listing.image_url}}" alt="{{ listing.title}}">
 
     <p>{{listing.category}}</p>
     <p>{{listing.description}}</p>
