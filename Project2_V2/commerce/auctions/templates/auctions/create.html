@@ -16,7 +16,8 @@
     <label for="starting">Starting price:</label><br>
         <input type="number" name="starting" id="starting" min="1" required><br>
     <label for="category">Select a category</label><br>
-        <select name="category" id="category">
+        <select name="category" id="category" required>
+            <option value="" disabled selected>Please choose an option</option>
         {% for category in categories %}
             <option value="{{category}}">{{category|capfirst}}</option>
         {% endfor %}
