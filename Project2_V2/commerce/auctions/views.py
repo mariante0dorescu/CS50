@@ -144,6 +144,7 @@ def listing(request, pk):
 
     return render(request, "auctions/listing.html", context)
 
+
 @login_required(login_url='/login/')
 def watching_list(request):
     items = Watching.objects.all().filter(user=request.user).values_list('listing', flat=True)
@@ -152,6 +153,7 @@ def watching_list(request):
     return render(request, "auctions/watched_items.html", {
         "listings" : listings,
     })
+
 
 @login_required(login_url='/login/')
 def watch(request, pk):
@@ -164,6 +166,7 @@ def watch(request, pk):
         user_list, created = Watching.objects.get_or_create(user=request.user)
         user_list.listing.add(item)
         return HttpResponseRedirect(reverse('listing', args=[pk]))
+
 
 @login_required(login_url='/login/')
 def unwatch(request, pk):
@@ -181,14 +184,14 @@ def unwatch(request, pk):
     except Watching.DoesNotExist:
         return HttpResponse('Item is not on your watch.')
 
+
 def categories_all(request):
     categories = Category.objects.all()
     categories_listings = {}
     for category in categories:
         listings = Listing.objects.filter(category=category)
         categories_listings[category] = listings
-
-    
+   
     return render(request, 'auctions/all_categories.html', {
         'categories_listings': categories_listings
     })
