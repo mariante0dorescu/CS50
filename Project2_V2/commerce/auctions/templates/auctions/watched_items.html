@@ -5,9 +5,19 @@
 <h2>Watched listings</h2>
 
     {% for listing in listings %}
-    {{listing.active}}
+    
     <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
     
+    {% if listing.active %}
+        <p>Active</p>
+    {% else %}
+        {% if listing.user.id == request.user.id  %}
+            <p>Congratulations! You have won this item.</p>
+        {% else %}
+        <p>Closed</p>
+        {% endif %}
+    {% endif %}
+
         {% if listing.image %}
             <img src="{{listing.image_url}}" alt="{{ listing.title}}">
         {% else %}
