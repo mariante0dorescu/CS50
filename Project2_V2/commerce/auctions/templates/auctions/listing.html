@@ -4,71 +4,87 @@
 
 {% block body %}
     <h3>{{listing.title}}</h3>
-    
-    {% if not owner %}
-        {% if watching %}
-            <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
-        {% else %}
-        <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
-        {% endif %}
-    {% endif %}
+    <!-- check for a image -->
     {% if listing.image %}
     <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
     {% else %}
         <img src="/uploads/default.jpg" alt="No image">
     {% endif %}
-
-    {% if bid %}
-        <h4>Latest bid</h4>
-        <p>{{bid.user}} ${{bid}}</p>
-    {% endif %}
-    
-    
-    {% if owner and bid %}
-    <form action="" name="close" method="post">
-        {% csrf_token %}
-        <p>Highest bid: ${{bid}}</p>
-        <input type="hidden" id="close" name="close">
-        <input type="submit" value="Close auction">
-    </form>
-    {% elif not owner %}
-    <form action="" name="bid" method="post">
-        {% csrf_token %}
-        {% if bid_error %}
-            <div class="alert alert-danger" role="alert">
-                {{bid_error}}
-            </div>
+    <!-- check if listing is active -->
+    {% if listing.active %}
+        <!-- if not owner, can add to watchlist -->
+        {% if not owner %}
+            {% if watching %}
+                <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
+            {% else %}
+            <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
+            {% endif %}
         {% endif %}
-        <input type="number" name="bid_amount" id="bid_amount" 
-            {% if not bid %} min="{{listing.starting}}"  
-            placeholder="{{listing.starting|floatformat:2}}" 
-            {% else %} 
-            min="{{bid|floatformat:2}}" placeholder="{{bid|floatformat:2}} 
-            {% endif %}" 
-            value="{{bid|floatformat:2}}"
-            required>
-        <input type="submit" value="Bid">
-    </form>
+        <!-- display the last bid, if there is one -->
+        <!-- {% if bid %}
+            <h4>Latest bid</h4>
+            <p>{{bid.user}} ${{bid}}</p>
+        {% endif %} -->
+
+        <!-- if is the owner, can close the auction, if there are any bids -->
+        {% if owner %}
+            {% if bid %}
+            <form action="" name="close" method="post">
+                {% csrf_token %}
+                <p>Highest bid: ${{bid}}</p>
+                <input type="hidden" id="close" name="close">
+                <input type="submit" value="Close auction">
+            </form>
+            {%else%}
+                <p>No bids yet.</p>            
+            {% endif %}
+        <!-- if is not owner, can bid -->
+        {% else %}
+            {% if bid %}
+                <p>Last bid: {{bid}}</p>
+            {%else%}
+                <p>No bids yet.</p>            
+            {% endif %}
+            <form action="" name="bid" method="post">
+                {% csrf_token %}
+                {% if bid_error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{bid_error}}
+                    </div>
+                {% endif %}
+                <input type="number" name="bid_amount" id="bid_amount" 
+                    {% if not bid %} min="{{listing.starting}}"  
+                    placeholder="{{listing.starting}}" 
+                    {% else %} 
+                    min="{{bid}}" placeholder="{{bid}} 
+                    {% endif %}" 
+                    value="{{bid}}"
+                    required>
+                <input type="submit" value="Bid">
+            </form>
+        {% endif %}
+        <!-- if the listing is not active -->
     {%else%}
-        <p>No bids yet.</p>
-    {% endif %}
-   
+        <p>Closed</p>
+    {% endif %}        
     <h4>Comments</h4>
     {% for comment in comments %}
     <p><b>{{comment.user}}</b></p>
     <p>{{comment.comment}}</p>
     {%empty%}
-    <p>No bids yet.</p>
+    <p>No comments yet.</p>
     {% endfor %}
-    <h4>Add a comment</h4>
-    <form action="" name="comment" method="post">
-        {% csrf_token %}
-        {% if comment_error %}
-            <div class="alert alert-danger" role="alert">
-                {{comment_error}}
-            </div>
-        {% endif %}
-        <input type="textarea" name="comment" required>
-        <input type="submit" value="Comment">
-    </form>
+   {% if not owner%}
+   <h4>Add a comment</h4>
+   <form action="" name="comment" method="post">
+       {% csrf_token %}
+       {% if comment_error %}
+           <div class="alert alert-danger" role="alert">
+               {{comment_error}}
+           </div>
+       {% endif %}
+       <input type="textarea" name="comment" required>
+       <input type="submit" value="Comment">
+   </form>
+   {% endif %}
 {% endblock %}

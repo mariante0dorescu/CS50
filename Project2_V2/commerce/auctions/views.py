@@ -125,7 +125,8 @@ def listing(request, pk):
 
         elif "close" in request.POST:
             if checkOwner(request, listing):
-                print(last_bid.user.id)
+                listing.active = False
+                listing.save()
                 print(listing.active)
 
         elif "comment" in request.POST:
