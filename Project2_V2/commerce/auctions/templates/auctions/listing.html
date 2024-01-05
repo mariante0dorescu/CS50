@@ -41,10 +41,16 @@
         <!-- if is not owner, can bid -->
         {% else %}
             {% if bid %}
-                <p>Last bid: {{bid}}</p>
+                {% if bid.user.id == request.user.id%}
+                    <p>You have the highest bid</p>
+                    <p>Last bid: {{bid}}</p>
+                {% else %}
+                    <p>Last bid: {{bid}}</p>
+                {% endif %}
             {%else%}
                 <p>No bids yet.</p>            
             {% endif %}
+            {% if bid.user.id != request.user.id%}
             <form action="" name="bid" method="post">
                 {% csrf_token %}
                 {% if bid_error %}
@@ -62,6 +68,7 @@
                     required>
                 <input type="submit" value="Bid">
             </form>
+            {% endif %}
         {% endif %}
         <!-- if the listing is not active -->
     {%else%}
