@@ -11,7 +11,7 @@
     {% if listing.active %}
         <p>Active</p>
     {% else %}
-        {% if listing.user.id == request.user.id  %}
+        {% if listing.winner.id == request.user.id  %}
             <p>Congratulations! You have won this item.</p>
         {% else %}
         <p>Closed</p>

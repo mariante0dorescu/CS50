@@ -73,7 +73,11 @@
         {% endif %}
         <!-- if the listing is not active -->
     {%else%}
-        <p>Closed</p>
+        {% if listing.winner.id == request.user.id  %}
+             <p>Congratulations! You have won this item.</p>
+        {% else %}
+            <p>Closed</p>
+        {% endif %}  
     {% endif %}        
     <h4>Comments</h4>
     {% for comment in comments %}

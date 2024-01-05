@@ -125,9 +125,10 @@ def listing(request, pk):
 
         elif "close" in request.POST:
             if checkOwner(request, listing):
-                listing.active = False
+                listing.winner = User.objects.get(id=last_bid.user.id)
                 listing.save()
                 print(listing.active)
+                return HttpResponseRedirect(reverse('listing', args=[pk]))
 
         elif "comment" in request.POST:
             new_comment = request.POST['comment']
