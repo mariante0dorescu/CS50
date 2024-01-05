@@ -4,7 +4,7 @@
 
 {% block body %}
     <h3>{{listing.title}}</h3>
-    <a href="{% url 'watching' %}">My watched items</a>
+    
     {% if not owner %}
         {% if watching %}
             <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
@@ -18,9 +18,9 @@
         <img src="/uploads/default.jpg" alt="No image">
     {% endif %}
 
-    {% if bid and not owner %}
+    {% if bid %}
         <h4>Latest bid</h4>
-        <p>{{bid.user}} ${{bid|floatformat:2}}</p>
+        <p>{{bid.user}} ${{bid}}</p>
     {% endif %}
     
     
@@ -28,7 +28,7 @@
     <form action="" name="close" method="post">
         {% csrf_token %}
         <p>Highest bid: ${{bid}}</p>
-        <input type="hidden" id="close" name="close" value="{{bid.user.id}}">
+        <input type="hidden" id="close" name="close">
         <input type="submit" value="Close auction">
     </form>
     {% elif not owner %}

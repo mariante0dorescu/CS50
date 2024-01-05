@@ -5,6 +5,7 @@
 <h2>Watched listings</h2>
 
     {% for listing in listings %}
+    {{listing.active}}
     <a href="{% url 'listing' listing.id %}"><h3>{{listing.title}}</h3></a>
     
         {% if listing.image %}

@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from .models import *
 
@@ -41,7 +41,7 @@ def category(request, str):
 
 def login_view(request):
     if request.method == "POST":
-
+        
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -124,7 +124,9 @@ def listing(request, pk):
                 return render(request, "auctions/listing.html", context)
 
         elif "close" in request.POST:
-            return HttpResponse(request.POST['close'])
+            if checkOwner(request, listing):
+                print(last_bid.user.id)
+                print(listing.active)
 
         elif "comment" in request.POST:
             new_comment = request.POST['comment']
