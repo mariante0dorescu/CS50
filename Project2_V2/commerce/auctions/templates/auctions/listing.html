@@ -4,12 +4,14 @@
 
 {% block body %}
     <h3>{{listing.title}}</h3>
+
     <!-- check for a image -->
     {% if listing.image %}
     <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
     {% else %}
         <img src="/uploads/default.jpg" alt="No image">
     {% endif %}
+
     <!-- check if listing is active -->
     {% if listing.active %}
         <!-- if not owner, can add to watchlist -->
@@ -17,30 +19,27 @@
             {% if watching %}
                 <a href="{% url 'unwatch' listing.id  %}" role="button" class="btn btn-outline-secondary btn-lg">Remove from Watchlist</a>
             {% else %}
-            <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
+                <a href="{% url 'watch' listing.id  %}" role="button" class="btn btn-outline-success btn-lg">Add to Watchlist</a>
             {% endif %}
         {% endif %}
-        <!-- display the last bid, if there is one -->
-        <!-- {% if bid %}
-            <h4>Latest bid</h4>
-            <p>{{bid.user}} ${{bid}}</p>
-        {% endif %} -->
 
         <!-- if is the owner, can close the auction, if there are any bids -->
         {% if owner %}
             {% if bid %}
             <form action="" name="close" method="post">
                 {% csrf_token %}
-                <p>Highest bid: ${{bid}}</p>
+                <p><strong>Highest bidder:</strong> {{bid.user|capfirst}} ${{bid}}</p>
                 <input type="hidden" id="close" name="close">
                 <input type="submit" value="Close auction">
             </form>
             {%else%}
                 <p>No bids yet.</p>            
             {% endif %}
+
         <!-- if is not owner, can bid -->
         {% else %}
             {% if bid %}
+                <!-- check if the user is the higher bidder -->
                 {% if bid.user.id == request.user.id%}
                     <p>You have the highest bid</p>
                     <p>Last bid: {{bid}}</p>
@@ -50,6 +49,8 @@
             {%else%}
                 <p>No bids yet.</p>            
             {% endif %}
+
+            <!-- display the bid form only if the user is outbidded -->
             {% if bid.user.id != request.user.id%}
             <form action="" name="bid" method="post">
                 {% csrf_token %}

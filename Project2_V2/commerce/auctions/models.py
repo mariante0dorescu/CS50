@@ -21,16 +21,22 @@ class Category(models.Model):
         ordering = ['name']
 
 class Listing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=200)
     image = models.FileField(upload_to=image_path, blank=True, null=False)
     starting = models.DecimalField(max_digits=3, decimal_places=2,validators=[MinValueValidator(limit_value=1)], default=1)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='category')
     active = models.BooleanField(default=True)
+    winner = models.OneToOneField(User, on_delete=models.PROTECT, null=True, blank=True, related_name="winner")
 
     def image_url(self):
         return self.image.url if self.image else None
+
+    def save(self,*args, **kwargs):
+        if self.winner:
+            self.active = False
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
