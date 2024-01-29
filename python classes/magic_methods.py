@@ -163,7 +163,17 @@ class Person2:
     def __str__(self):
         return f"{self.name} : {self.age}"
 
-andreea = Person2("Marian", 45)
-print(andreea)
-andreea.age = 36
-print(andreea.gender)
+# andreea = Person2("Marian", 45)
+# print(andreea)
+# andreea.age = 36
+# print(andreea.gender)
+
+#TYPE HINTING usign mypy - a tool for checking
+def my_func(parameter: str) -> str:
+    ...
+
+def do_smt(param: list[int]):
+    ...
+
+# FACTORY DESIGN PATTERNS
+
