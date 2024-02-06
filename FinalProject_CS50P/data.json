@@ -1,0 +1,366 @@
+[
+  {
+    "id": 1,
+    "name": "Quantum Processor X",
+    "price": 225,
+    "quantity": 160,
+    "description": "Citizen watch politics almost sense."
+  },
+  {
+    "id": 2,
+    "name": "Cybernetic Keyboard Elite",
+    "price": 80,
+    "quantity": 51,
+    "description": "Value economy attack citizen very deep."
+  },
+  {
+    "id": 3,
+    "name": "Titan Graphics Card Pro",
+    "price": 175,
+    "quantity": 172,
+    "description": "Worry conference any white."
+  },
+  {
+    "id": 4,
+    "name": "Nano SSD Turbo",
+    "price": 197,
+    "quantity": 123,
+    "description": "Paper office generation however candidate ready chance."
+  },
+  {
+    "id": 5,
+    "name": "Quantum Mouse Precision",
+    "price": 121,
+    "quantity": 20,
+    "description": "Eat institution better center control prevent nation."
+  },
+  {
+    "id": 6,
+    "name": "Stellar Gaming Monitor",
+    "price": 187,
+    "quantity": 97,
+    "description": "Wait radio throw impact different name."
+  },
+  {
+    "id": 7,
+    "name": "Celestial Cooling Fan",
+    "price": 57,
+    "quantity": 5,
+    "description": "Yard beat former production send eye."
+  },
+  {
+    "id": 8,
+    "name": "Fusion Motherboard Ultra",
+    "price": 55,
+    "quantity": 78,
+    "description": "Late throughout sure all project develop."
+  },
+  {
+    "id": 9,
+    "name": "Virtual Reality Headset Pro",
+    "price": 186,
+    "quantity": 28,
+    "description": "Week paper present citizen individual true hard."
+  },
+  {
+    "id": 10,
+    "name": "Quantum Gaming Chair X",
+    "price": 54,
+    "quantity": 10,
+    "description": "Reveal couple director kid."
+  },
+  {
+    "id": 11,
+    "name": "Lunar Gaming Laptop",
+    "price": 24,
+    "quantity": 194,
+    "description": "Enter respond test news perhaps while who."
+  },
+  {
+    "id": 12,
+    "name": "Nebula Desktop Tower",
+    "price": 54,
+    "quantity": 98,
+    "description": "Environment level service visit."
+  },
+  {
+    "id": 13,
+    "name": "Solar Flare RGB Lighting Kit",
+    "price": 26,
+    "quantity": 106,
+    "description": "Can music citizen."
+  },
+  {
+    "id": 14,
+    "name": "Quantum Ethernet Cable Supreme",
+    "price": 5,
+    "quantity": 106,
+    "description": "Appear nor car food police."
+  },
+  {
+    "id": 15,
+    "name": "Galactic Gaming Mousepad",
+    "price": 155,
+    "quantity": 71,
+    "description": "Himself arm about certainly wide."
+  },
+  {
+    "id": 16,
+    "name": "Cybernetic Webcam HD",
+    "price": 48,
+    "quantity": 154,
+    "description": "Window end win base probably."
+  },
+  {
+    "id": 17,
+    "name": "Infinite USB Hub Nexus",
+    "price": 167,
+    "quantity": 129,
+    "description": "Human indeed public serve debate radio free."
+  },
+  {
+    "id": 18,
+    "name": "Nebula Wireless Router Elite",
+    "price": 71,
+    "quantity": 69,
+    "description": "Economic seek health five she field head."
+  },
+  {
+    "id": 19,
+    "name": "Quantum Gaming Speakers 5.1",
+    "price": 5,
+    "quantity": 40,
+    "description": "Sell debate at body article."
+  },
+  {
+    "id": 20,
+    "name": "Celestial Laptop Stand",
+    "price": 25,
+    "quantity": 128,
+    "description": "Left because skin glass."
+  },
+  {
+    "id": 21,
+    "name": "Nova External Hard Drive Titan",
+    "price": 66,
+    "quantity": 129,
+    "description": "Offer short today by."
+  },
+  {
+    "id": 22,
+    "name": "Binary Code Coffee Mug",
+    "price": 45,
+    "quantity": 78,
+    "description": "Product wife pick yes."
+  },
+  {
+    "id": 23,
+    "name": "Satellite Bluetooth Earbuds",
+    "price": 91,
+    "quantity": 198,
+    "description": "Race prove surface always price worker."
+  },
+  {
+    "id": 24,
+    "name": "Fusion Desk Organizer",
+    "price": 19,
+    "quantity": 47,
+    "description": "Such short organization sister senior simply inside."
+  },
+  {
+    "id": 25,
+    "name": "Stellar Cable Management Kit",
+    "price": 146,
+    "quantity": 9,
+    "description": "Author exist star style speak everybody end."
+  },
+  {
+    "id": 26,
+    "name": "Matrix Mechanical Gaming Keypad",
+    "price": 182,
+    "quantity": 171,
+    "description": "Claim culture than suddenly."
+  },
+  {
+    "id": 27,
+    "name": "Virtual Assistant AI Beacon",
+    "price": 79,
+    "quantity": 177,
+    "description": "Body grow four hot necessary must soldier world."
+  },
+  {
+    "id": 28,
+    "name": "Quantum Tech Toolkit Pro",
+    "price": 163,
+    "quantity": 86,
+    "description": "Industry discover law opportunity painting father rate first."
+  },
+  {
+    "id": 29,
+    "name": "Celestial Laptop Sleeve",
+    "price": 55,
+    "quantity": 8,
+    "description": "Individual can improve stay election support difference."
+  },
+  {
+    "id": 30,
+    "name": "Nebula Wireless Charging Pad",
+    "price": 194,
+    "quantity": 60,
+    "description": "Yes increase energy dinner true."
+  },
+  {
+    "id": 31,
+    "name": "Quantum Gaming Glasses Elite",
+    "price": 193,
+    "quantity": 96,
+    "description": "Serious research stuff wait."
+  },
+  {
+    "id": 32,
+    "name": "Fusion Mouse Bungee",
+    "price": 184,
+    "quantity": 149,
+    "description": "Be even trouble old reach."
+  },
+  {
+    "id": 33,
+    "name": "Binary Code Backpack Nexus",
+    "price": 199,
+    "quantity": 90,
+    "description": "Benefit billion marriage."
+  },
+  {
+    "id": 34,
+    "name": "Nebula Smartwatch Infinity",
+    "price": 69,
+    "quantity": 167,
+    "description": "For common break smile fine fine soon here."
+  },
+  {
+    "id": 35,
+    "name": "Celestial Desk Mat Pro",
+    "price": 82,
+    "quantity": 20,
+    "description": "Question thought seek her."
+  },
+  {
+    "id": 36,
+    "name": "Quantum Gaming Gloves Ultra",
+    "price": 67,
+    "quantity": 69,
+    "description": "Last international memory again wide law skill."
+  },
+  {
+    "id": 37,
+    "name": "Galactic External Battery Powerhouse",
+    "price": 78,
+    "quantity": 134,
+    "description": "Week time seven me perhaps show determine."
+  },
+  {
+    "id": 38,
+    "name": "Titan Laptop Cooling Pad",
+    "price": 24,
+    "quantity": 35,
+    "description": "Reduce white control."
+  },
+  {
+    "id": 39,
+    "name": "Cybernetic Cable Clips Supreme",
+    "price": 118,
+    "quantity": 60,
+    "description": "Occur practice part off prepare risk property."
+  },
+  {
+    "id": 40,
+    "name": "Nova Gaming Controller Eclipse",
+    "price": 168,
+    "quantity": 174,
+    "description": "By attorney including improve himself unit."
+  },
+  {
+    "id": 41,
+    "name": "Stellar USB-C Docking Station",
+    "price": 40,
+    "quantity": 136,
+    "description": "Party authority TV table again society."
+  },
+  {
+    "id": 42,
+    "name": "Lunar Monitor Stand Nexus",
+    "price": 61,
+    "quantity": 150,
+    "description": "Third particular power do ever industry."
+  },
+  {
+    "id": 43,
+    "name": "Quantum Gaming Backpack X",
+    "price": 98,
+    "quantity": 53,
+    "description": "Among house write share draw no few."
+  },
+  {
+    "id": 44,
+    "name": "Celestial Microphone Studio Edition",
+    "price": 41,
+    "quantity": 64,
+    "description": "Majority what board look fact try author."
+  },
+  {
+    "id": 45,
+    "name": "Nebula USB Flash Drive Quantum",
+    "price": 68,
+    "quantity": 133,
+    "description": "They may little response ahead thought."
+  },
+  {
+    "id": 46,
+    "name": "Infinity Webcam Cover Stealth",
+    "price": 198,
+    "quantity": 84,
+    "description": "Impact science action eight available."
+  },
+  {
+    "id": 47,
+    "name": "Quantum VR Controller Odyssey",
+    "price": 172,
+    "quantity": 100,
+    "description": "Marriage add sometimes nothing me."
+  },
+  {
+    "id": 48,
+    "name": "Fusion Graphics Tablet Stellar",
+    "price": 55,
+    "quantity": 161,
+    "description": "He people power I detail fear."
+  },
+  {
+    "id": 49,
+    "name": "Titan Laptop Lock Security",
+    "price": 69,
+    "quantity": 77,
+    "description": "Happen huge national across piece individual."
+  },
+  {
+    "id": 50,
+    "name": "Galactic Cable Sleeve Nexus",
+    "price": 171,
+    "quantity": 154,
+    "description": "Cup cause coach believe learn take."
+  },
+  {
+    "id": 51,
+    "name": "Cybernetic Travel Laptop Stand",
+    "price": 19,
+    "quantity": 168,
+    "description": "Program operation imagine every seek which."
+  },
+  {
+    "id": 52,
+    "name": "Nova Bluetooth Mechanical Keyboard",
+    "price": 65,
+    "quantity": 205,
+    "description": "Suddenly choose myself personal feel rock."
+  }
+]

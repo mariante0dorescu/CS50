@@ -1,0 +1,4 @@
+pip3 install fpdf2
+pip3 install art
+pip3 install tabulate
+pip3 install mypy
