@@ -1,5 +1,5 @@
 # INVENTORY, a small stock application
-#### [Video Demo](https://youtu.be/vMlMlR-eRp4)
+#### [Video Demo](https://youtu.be/PofETIW8_Og)
 #### Description:
 INVENTORY is the final project for CS50P curriculum.
 
@@ -88,5 +88,24 @@ main.py: where all the classes and modules are imported
 inventory.py: a class that creates a list of product objects from a JSON file with defined methods
 product.py: a class that creates individual item objects
 decorator.py: a function used to wrap some functionality in main.py
+
+### CLASSES
+
+#### PRODUCT
+Class with the following attributes: id, name, quantity, price, description and a single method that returns a dictionary to be used with tabulate module for printing
+
+#### INVENTORY
+Class that creates a list of products objects from a json file
+    with the followinf methods:
+    - load file: loads a json and creates Product objectby assigning ke/value entries with Product class attributes
+    - also check if the file contains any data
+    - get item to update: get ID from user and checks if is an integer and the ID is one of the products in the list
+    - total value of inventory: sum the number of items/pcs multiplied by price and return the total value
+    - total quantity of items: sum the number of pcs / items and returns the value
+    - update item price
+    - update item quantity
+    - edit items data function: transforms the keys to uppercase, adds ".pcs" and "$ " to each item from the inventory (used in printing)
+    - prints inventory using tabulate moduleand edit items data function
+    - prints one line of the inventory using tabulate module and edit items data function
 
 #### Autor: Marian Teodorescu, Feb 2024

@@ -1,4 +1,5 @@
 import json
+import sys
 from product import Product
 from tabulate import tabulate
 from decorator import decorator
@@ -8,6 +9,7 @@ class Inventory:
     class that creates a list of products objects from a json file
     with the followinf methods:
     - load file: loads a json and creates Product objectby assigning ke/value entries with Product class attributes
+    - also check if the file contains any data
     - get item to update: get ID from user and checks if is an integer and the ID is one of the products in the list
     - total value of inventory: sum the number of items/pcs multiplied by price and return the total value
     - total quantity of items: sum the number of pcs / items and returns the value
@@ -20,20 +22,24 @@ class Inventory:
     def __init__(self):
         self.inventory = []
 
+
     def load_file(self, filename: str):
         self.file_name = filename
-        with open(filename) as file:
-            data = json.load(file)
-            for line in data:
-                self.inventory.append(
-                    Product(
-                        id=line["id"],
-                        name=line["name"],
-                        price=line["price"],
-                        quantity=line["quantity"],
-                        description=line["description"],
+        try:
+            with open(filename) as file:
+                data = json.load(file)
+                for line in data:
+                    self.inventory.append(
+                        Product(
+                            id=line["id"],
+                            name=line["name"],
+                            price=line["price"],
+                            quantity=line["quantity"],
+                            description=line["description"],
+                        )
                     )
-                )
+        except json.JSONDecodeError:
+            sys.exit("File is empty")
 
     def get_items(self):
         data = []

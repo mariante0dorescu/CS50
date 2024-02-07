@@ -11,7 +11,7 @@ def main():
     print(text2art("INVENTORY"))
 
     # assign variables for stock object and file name as string
-    stock, opened_file = start_program()
+    stock, opened_file_name = start_program()
 
     while True:
         """takes user command and returns the corresponding function loops each time after user action"""    
@@ -26,12 +26,12 @@ def main():
                 print(stock.total_quantity_of_items())
             case 4:
                 stock.update_item_price()
-                export_file(stock, opened_file)
+                export_file(stock, opened_file_name)
             case 5:
                 stock.update_item_stock()
-                export_file(stock, opened_file)
+                export_file(stock, opened_file_name)
             case 6:
-                export_to_pdf(stock, opened_file)
+                export_to_pdf(stock, opened_file_name)
             case 7:
                 sys.exit(text2art("GOOD  BYE"))
             case _:
